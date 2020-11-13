@@ -17,33 +17,47 @@
         app:iconSpaceReserved="false"
         android:key="time"
         android:title="8:30"/>
-  </PreferenceCategory>
-    <PreferenceCategory
+    <Preference
+        app:dependency="notification_switch"
+        android:summary="select days to be notified"
         app:iconSpaceReserved="false"
-        android:title="Backup data"
-        android:summary="Enable to auto back up data">
+        android:key="Days"
+        android:title="10"/>
+  </PreferenceCategory>
+  <PreferenceCategory
+      app:iconSpaceReserved="false"
+      android:title="Backup data"
+      android:summary="Enable to auto back up data">
     <SwitchPreference
         android:defaultValue="true"
         android:title="Sync with Gmail"
         android:summary="switch to sync with Gmail"
         app:iconSpaceReserved="false"
         android:key="Sync_switch"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:title="backup daily"
+        app:dependency="Sync_switch"
+        app:iconSpaceReserved="false"
+        android:key="Daily_update"
+        app:summaryOff="turn on take back up daily"
+        android:summary="turn off to cancel back up daily"/>
 
-        <Preference
-            android:summary="tap to Restore"
-            app:iconSpaceReserved="false"
-            android:key="sync"
-            app:dependency="Sync_switch"
-            app:isPreferenceVisible="true"
-            android:title="update found"/>
-      <Preference
-          android:summary="tap to Restore"
-          app:iconSpaceReserved="false"
-          android:key="restore"
-          app:isPreferenceVisible="false"
-          app:dependency="Sync_switch"
-          android:title="update found"/>
+    <Preference
+        android:summary="tap to Restore"
+        app:iconSpaceReserved="false"
+        android:key="sync"
+        app:dependency="Sync_switch"
+        app:isPreferenceVisible="true"
+        android:title="update found"/>
+    <Preference
+        android:summary="tap to Restore"
+        app:iconSpaceReserved="false"
+        android:key="restore"
+        app:isPreferenceVisible="false"
+        app:dependency="Sync_switch"
+        android:title="update found"/>
 
-    </PreferenceCategory>
+  </PreferenceCategory>
 
 </PreferenceScreen>

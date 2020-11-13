@@ -34,6 +34,8 @@ import com.hbisoft.pickit.PickiTCallbacks;
 import com.jaydip.warrenty.Models.ItemModel;
 import com.jaydip.warrenty.ViewModels.CategoryViewModel;
 import com.jaydip.warrenty.ViewModels.ItemViewModel;
+import com.jaydip.warrenty.prefsUtil.PrefUtil;
+import com.jaydip.warrenty.prefsUtil.prefIds;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,7 +58,7 @@ import androidx.lifecycle.Observer;
 
 public class EditItem extends AppCompatActivity implements PickiTCallbacks {
 
-    EditText Iname,Imonth,Idetail,labelTest;
+    EditText Iname,Imonth,Idetail;
     TextView Idate,Isave,Inamelabel,Idatelebel,Imonthlabel,Idetaillabel,pdfName;
     Button AttachImage,AttachBill,AttachPdf;
     Spinner Icategory;
@@ -66,7 +68,7 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
     ItemViewModel itemViewModel;
     String currentCategory,lastDate,lastCategory,currentImageUri,currentBillUri,currentpdfpath;
     Toolbar toolbar;
-    byte[] ItemImage,BillImage;
+    byte[] ItemImage;
     Bitmap ItemBitmap,BillBitmap;
     private static int REQUEST_CODE_Image =100;
     private static int REQUEST_CODE_Bill =150;
@@ -122,8 +124,8 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
 
 
 
-         labelUp = AnimationUtils.loadAnimation(this,R.anim.label_up);
-         labelDown = AnimationUtils.loadAnimation(this,R.anim.label_down);
+        labelUp = AnimationUtils.loadAnimation(this,R.anim.label_up);
+        labelDown = AnimationUtils.loadAnimation(this,R.anim.label_down);
 
         Iname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -215,31 +217,31 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
         AttachImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(EditItem.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},STORAGE_REQUEST_CODE);
                 }
                 else {
-                     Intent itemIntent = new Intent();
-                     itemIntent.setAction(Intent.ACTION_GET_CONTENT);
-                     itemIntent.setType("image/*");
-                     startActivityForResult(itemIntent, REQUEST_CODE_Image);
-                 }
+                    Intent itemIntent = new Intent();
+                    itemIntent.setAction(Intent.ACTION_GET_CONTENT);
+                    itemIntent.setType("image/*");
+                    startActivityForResult(itemIntent, REQUEST_CODE_Image);
+                }
             }
         });
         AttachBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(EditItem.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},STORAGE_REQUEST_CODE);
                 }
                 else {
-                     Intent itemIntent = new Intent();
-                     itemIntent.setAction(Intent.ACTION_GET_CONTENT);
-                     itemIntent.setType("image/*");
-                     String[] mimetype = {"image/*", "application/pdf"};
-                     itemIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimetype);
-                     startActivityForResult(itemIntent, REQUEST_CODE_Bill);
-                 }
+                    Intent itemIntent = new Intent();
+                    itemIntent.setAction(Intent.ACTION_GET_CONTENT);
+                    itemIntent.setType("image/*");
+                    String[] mimetype = {"image/*", "application/pdf"};
+                    itemIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimetype);
+                    startActivityForResult(itemIntent, REQUEST_CODE_Bill);
+                }
 
 
             }
@@ -254,10 +256,10 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-            if(validateInfo(true)){
-                Log.e("jaydip","saved");
-                saveItem();
-            }
+                if(validateInfo(true)){
+                    Log.e("jaydip","saved");
+                    saveItem();
+                }
             }
         });
 
@@ -354,7 +356,7 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
             if (ItemBitmap != null && isImageChanged) {
                 File file;
                 if(item.getItemImageUri() != null){
-                     file = new File(item.getItemImageUri());
+                    file = new File(item.getItemImageUri());
                 }
                 else {
                     file = PathProvider.getOutputMediaFile(getApplicationContext(),true);
@@ -451,6 +453,7 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
 //                Utils.copyPdf(getApplicationContext(),currentpdfpath,toStore);
 //                item.setPdfName(pdfName.getText().toString());
 //            }
+            PrefUtil.saveToPrivate(getApplicationContext(), prefIds.Daily_update_Check,"yes");
             itemViewModel.update(item);
             if (!currentCategory.equals(lastCategory)) {
                 categoryViewModel.decrementItem(lastCategory);
@@ -489,21 +492,21 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
     //for change purchase date
     void setDate(){
         try {
-        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                Idate.setText(dayOfMonth+"/"+(month+1)+"/"+year);
-            }
-        };
-        Date date = format.parse(Idate.getText().toString());
+            DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    Idate.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                }
+            };
+            Date date = format.parse(Idate.getText().toString());
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,listener,
-              calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,listener,
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.show();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -517,7 +520,7 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
 
         if(Imonth.getText().toString().length() == 0){
             Imonth.setBackground(getDrawable(R.drawable.required_outline));
-           if(val){ Imonth.requestFocus();}
+            if(val){ Imonth.requestFocus();}
             result = false;
         }
         else {
@@ -651,7 +654,7 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
 
     //calculate new expire date
     public String calculateExpireDate(String newDate,int expmonth){
-            String expiredate = "";
+        String expiredate = "";
         try {
 
             Date date = format.parse(newDate);
@@ -671,7 +674,7 @@ public class EditItem extends AppCompatActivity implements PickiTCallbacks {
         catch (Exception e){
             e.printStackTrace();
         }
-            return expiredate;
+        return expiredate;
     }
 
 

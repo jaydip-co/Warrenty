@@ -65,88 +65,88 @@ public class QuestionsFrag extends Fragment {
         setListeners();
         return v;
     }
-   void setListeners(){
-       Name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-           @Override
-           public void onFocusChange(View v, boolean hasFocus) {
-               if(hasFocus){
-                   if(Name.getText().toString().length() == 0){
-                       NameLabel.startAnimation(labelUp);
-                   }
-               }
-               else {
-                   if(Name.getText().toString().length() == 0){
-                       NameLabel.startAnimation(labelDown);
-                   }
-               }
-           }
-       });
-       Answer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-           @Override
-           public void onFocusChange(View v, boolean hasFocus) {
-               if(hasFocus){
-                   if(Answer.getText().toString().length() == 0){
-                       AnswerLabel.startAnimation(labelUp);
-                   }
-               }
-               else {
-                   if(Answer.getText().toString().length() == 0){
-                       AnswerLabel.startAnimation(labelDown);
-                   }
-               }
-           }
-       });
-       String[] array = getResources().getStringArray(R.array.recoveryQuestions);
+    void setListeners(){
+        Name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    if(Name.getText().toString().length() == 0){
+                        NameLabel.startAnimation(labelUp);
+                    }
+                }
+                else {
+                    if(Name.getText().toString().length() == 0){
+                        NameLabel.startAnimation(labelDown);
+                    }
+                }
+            }
+        });
+        Answer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    if(Answer.getText().toString().length() == 0){
+                        AnswerLabel.startAnimation(labelUp);
+                    }
+                }
+                else {
+                    if(Answer.getText().toString().length() == 0){
+                        AnswerLabel.startAnimation(labelDown);
+                    }
+                }
+            }
+        });
+        String[] array = getResources().getStringArray(R.array.recoveryQuestions);
 
-       ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item
-       ,array);
-       stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       questionSpinner.setAdapter(stringArrayAdapter);
-       questionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               Log.e("jaydip",array[position]);
-               RecoveryQuestion = array[position];
-           }
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item
+                ,array);
+        stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        questionSpinner.setAdapter(stringArrayAdapter);
+        questionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("jaydip",array[position]);
+                RecoveryQuestion = array[position];
+            }
 
-           @Override
-           public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-           }
-       });
-       TextWatcher watcher = new TextWatcher() {
-           @Override
-           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+        });
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-           }
+            }
 
-           @Override
-           public void onTextChanged(CharSequence s, int start, int before, int count) {
-               Validate();
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Validate();
 
-           }
+            }
 
-           @Override
-           public void afterTextChanged(Editable s) {
+            @Override
+            public void afterTextChanged(Editable s) {
 
-           }
-       };
-       Answer.addTextChangedListener(watcher);
-       Name.addTextChangedListener(watcher);
+            }
+        };
+        Answer.addTextChangedListener(watcher);
+        Name.addTextChangedListener(watcher);
 
-       Continue.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               PrefUtil.saveToPrivate(getActivity(), prefIds.RECOVERY_QUESTION,Answer.getText().toString());
-               PrefUtil.saveToPrivate(getActivity(),prefIds.RECOVERY_QUESTION,RecoveryQuestion);
-               PrefUtil.saveToPrivate(getActivity(),prefIds.USER_NAME,Name.getText().toString());
-              BackUpFragment fragment = new BackUpFragment();
-              getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.Container,fragment).commit();
-           }
-       });
+        Continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrefUtil.saveToPrivate(getActivity(), prefIds.RECOVERY_ANSWER,Answer.getText().toString());
+                PrefUtil.saveToPrivate(getActivity(),prefIds.RECOVERY_QUESTION,RecoveryQuestion);
+                PrefUtil.saveToPrivate(getActivity(),prefIds.USER_NAME,Name.getText().toString());
+                BackUpFragment fragment = new BackUpFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.Container,fragment).commit();
+            }
+        });
 
-   }
-   void Validate(){
-       Continue.setEnabled(Name.getText().toString().length() > 0 && Answer.getText().toString().length() > 0);
-   }
+    }
+    void Validate(){
+        Continue.setEnabled(Name.getText().toString().length() > 0 && Answer.getText().toString().length() > 0);
+    }
 }

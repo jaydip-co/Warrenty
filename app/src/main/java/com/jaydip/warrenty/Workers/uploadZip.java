@@ -68,16 +68,17 @@ public class uploadZip extends Worker {
                         manager.notify(110,mBuilder.build());
                         if(!lastId.equals(PrefUtil.Default_Value)){
                             helper.deleteBackup(lastId).addOnSuccessListener(new OnSuccessListener<String>() {
-                            @Override
-                            public void onSuccess(String s) {
-                                Log.e("jay","Deleted successFully");
-                                PrefUtil.saveToPrivate(getApplicationContext(),prefIds.LAST_BACKUP_ID,newId);
-                                mBuilder.setProgress(100,100,false)
-                                .setContentTitle("Completed");
-                                manager.notify(110,mBuilder.build());
+                                @Override
+                                public void onSuccess(String s) {
+                                    Log.e("jay","Deleted successFully");
+                                    PrefUtil.saveToPrivate(getApplicationContext(),prefIds.LAST_BACKUP_ID,newId);
+                                    mBuilder.setProgress(100,100,false)
+                                            .setContentTitle("Completed");
+                                    manager.notify(110,mBuilder.build());
+                                    PrefUtil.saveToPrivate(getApplicationContext(),prefIds.Daily_update_Check,PrefUtil.Default_Value);
 
-                            }
-                        });
+                                }
+                            });
                         }
                     }
                 })
