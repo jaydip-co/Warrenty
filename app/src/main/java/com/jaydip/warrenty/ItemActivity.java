@@ -73,22 +73,22 @@ public class ItemActivity extends FragmentActivity implements DeleteItem , Activ
         currentCategory = intent.getStringExtra("title");
         title.setText(currentCategory);
         items = new ArrayList<>();
-       itemViewModel = new ItemViewModel(getApplication());
-       Iaddapter = new itemAddapter(this);
-       ItemView = findViewById(R.id.OneCategory);
-       ItemView.setLayoutManager(new LinearLayoutManager(this));
-       ItemView.setAdapter(Iaddapter);
-       categoryModel = new CategoryViewModel(getApplication());
-       addItem = findViewById(R.id.addItem);
-       expired = findViewById(R.id.expiredRecycle);
-       expired.setLayoutManager(new LinearLayoutManager(this));
+        itemViewModel = new ItemViewModel(getApplication());
+        Iaddapter = new itemAddapter(this);
+        ItemView = findViewById(R.id.OneCategory);
+        ItemView.setLayoutManager(new LinearLayoutManager(this));
+        ItemView.setAdapter(Iaddapter);
+        categoryModel = new CategoryViewModel(getApplication());
+        addItem = findViewById(R.id.addItem);
+        expired = findViewById(R.id.expiredRecycle);
+        expired.setLayoutManager(new LinearLayoutManager(this));
         ExpiredItemAddapter expiredAddapter = new ExpiredItemAddapter(this);
-       expired.setAdapter(expiredAddapter);
-       expiredTitle = findViewById(R.id.expiredTitle);
-      expired.setScrollContainer(false);
-      ItemView.setScrollContainer(false);
+        expired.setAdapter(expiredAddapter);
+        expiredTitle = findViewById(R.id.expiredTitle);
+        expired.setScrollContainer(false);
+        ItemView.setScrollContainer(false);
 
-       ///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////
 
 
 
@@ -102,14 +102,14 @@ public class ItemActivity extends FragmentActivity implements DeleteItem , Activ
                 List<ItemModel> expiredItem = new ArrayList<>();
                 for (ItemModel i : itemModels){
                     try {
-                    String expire = i.getExpireDate();
-                    Date expireDate = format.parse(expire);
-                    if(Calendar.getInstance().getTime().getTime() < expireDate.getTime()){
-                        continueItem.add(i);
-                    }
-                    else {
-                        expiredItem.add(i);
-                    }
+                        String expire = i.getExpireDate();
+                        Date expireDate = format.parse(expire);
+                        if(Calendar.getInstance().getTime().getTime() < expireDate.getTime()){
+                            continueItem.add(i);
+                        }
+                        else {
+                            expiredItem.add(i);
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -124,6 +124,7 @@ public class ItemActivity extends FragmentActivity implements DeleteItem , Activ
                 }
                 else {
                     expiredTitle.setVisibility(View.GONE);
+                    expiredAddapter.setItems(expiredItem);
 
                 }
 //                expiredTitle.setVisibility(View.VISIBLE);
@@ -150,23 +151,8 @@ public class ItemActivity extends FragmentActivity implements DeleteItem , Activ
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.item_add,menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.addItem){
-            Intent intent = new Intent(this,AddItem.class);
-            startActivity(intent);
-            return true;
 
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     //listening for delete item
     @Override
@@ -189,14 +175,6 @@ public class ItemActivity extends FragmentActivity implements DeleteItem , Activ
         builder.show();
     }
 
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.e("jaydip","result");
-    }
 
     @Override
     public void satrtActivity(ItemModel model) {
@@ -221,10 +199,10 @@ public class ItemActivity extends FragmentActivity implements DeleteItem , Activ
             startActivity(intent);
         }
         else {
-           Intent intent = new Intent(getApplicationContext(),ImageActivity.class);
-           intent.putExtra(ImageActivity.KEY_FOR_IMAGE_URI,Uri);
-           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-           startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(),ImageActivity.class);
+            intent.putExtra(ImageActivity.KEY_FOR_IMAGE_URI,Uri);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 

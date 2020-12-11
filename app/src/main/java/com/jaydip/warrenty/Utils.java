@@ -49,8 +49,8 @@ public class Utils {
         int hour = hourT == 0 ? 8 :hourT;
         int minute = minuteT == 0 ? 30 : minuteT;
         Log.e("jaydip","hour "+hour+"   minute"+minute);
-        calendar.set(Calendar.HOUR_OF_DAY,2);
-        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.HOUR_OF_DAY,14);
+        calendar.set(Calendar.MINUTE,23);
         calendar.set(Calendar.SECOND,0);
         Calendar now = Calendar.getInstance();
         if(calendar.getTimeInMillis() <= now.getTimeInMillis()){

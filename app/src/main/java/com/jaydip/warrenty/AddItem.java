@@ -369,7 +369,7 @@ public class AddItem extends AppCompatActivity implements PickiTCallbacks {
     //for saving data in database
     public void saveItem(){
         try {
-            categoryViewModel.incrementItem(currentCategory);
+
             model = new ItemModel();
             model.setIname(Iname.getText().toString());
             model.setCategory(currentCategory);
@@ -429,6 +429,7 @@ public class AddItem extends AppCompatActivity implements PickiTCallbacks {
             PrefUtil.saveToPrivate(getApplicationContext(), prefIds.Daily_update_Check,"yes");
             Log.e("jaydip", "added");
             Toast.makeText(this, Iname.getText().toString() + " added ", Toast.LENGTH_SHORT).show();
+            categoryViewModel.incrementItem(currentCategory);
             finish();
         }
         catch (Exception e){

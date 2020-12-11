@@ -23,7 +23,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/uploadLogo"
       app:layout_constraintEnd_toEndOf="parent"
-      android:text="Chech for backup with your Gmail account"
+      android:text="Check for backup with your Gmail account"
       android:textColor="@color/white"
       android:textSize="20dp"
       android:layout_width="wrap_content"
@@ -78,13 +78,14 @@
   <Button
       android:padding="5dp"
       android:id="@+id/check_button"
+      android:visibility="invisible"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       android:layout_marginBottom="200dp"
       android:text="Check For Update"
       android:layout_width="wrap_content"
-      android:background="@drawable/round_button"
+      android:background="@drawable/round_button_backup"
       android:layout_height="wrap_content" />
 
   <Button

@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,12 +73,17 @@ public class HomeFragment extends Fragment {
         e2 = v.findViewById(R.id.pin2);
         e3 = v.findViewById(R.id.pin3);
         e4 = v.findViewById(R.id.pin4);
-        pin_entered = getActivity().getDrawable(R.drawable.pincode_entered_back);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            pin_entered = getActivity().getDrawable(R.drawable.pincode_entered_back);
+
         pin_back = getActivity().getDrawable(R.drawable.pincode_back);
         pinback_focus = getActivity().getDrawable(R.drawable.pinback_focus);
         pinback_entered_focus = getActivity().getDrawable(R.drawable.pinback_entered_focus);
+            pin_error = getActivity().getDrawable(R.drawable.pin_error);
+        
+        }
         pincode = v.findViewById(R.id.pincode_edit);
-        pin_error = getActivity().getDrawable(R.drawable.pin_error);
+
         ForgotPin = v.findViewById(R.id.ForgotPass);
 
 
@@ -151,9 +156,11 @@ public class HomeFragment extends Fragment {
         int len = pincode.getText().toString().length();
         if(len == 4){
             loginButton.setEnabled(true);
+//            loginButton.setTextColor(getContext().getColor(R.color.white));
         }
         else {
             loginButton.setEnabled(false);
+
         }
         switch (len){
             case 0:

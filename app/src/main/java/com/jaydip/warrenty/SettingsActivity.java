@@ -252,7 +252,10 @@ public class SettingsActivity extends AppCompatActivity {
             DaysPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    NumberPicker numberPicker = new  NumberPicker(getContext());
+                    NumberPicker numberPicker = (NumberPicker) LayoutInflater.from(getContext()).inflate(R.layout.number_picker,null);
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                        numberPicker.setTextSize(50);
+//                    }
                     numberPicker.setMinValue(7);
                     numberPicker.setMaxValue(15);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext())

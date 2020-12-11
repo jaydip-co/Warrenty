@@ -204,6 +204,7 @@ public class BackUpFragment extends Fragment {
         });
     }
     void setRestore(){
+        checkButton.setVisibility(View.VISIBLE);
         checkButton.setText("Restore Data");
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override

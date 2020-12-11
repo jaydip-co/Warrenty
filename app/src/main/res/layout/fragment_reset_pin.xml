@@ -171,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/button_selector"
         android:elevation="1dp"
         android:text="Reset Pin"
         android:layout_gravity="center_horizontal"
