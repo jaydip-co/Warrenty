@@ -247,7 +247,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
             int dayT = PrefUtil.getPrefFieldInt(getContext(),prefIds.ALARM_DAY);
-            int day = dayT == 0 ? 10 : dayT;
+            int day = dayT == 0 ? 7 : dayT;
             DaysPref.setTitle(String.valueOf(day));
             DaysPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -256,8 +256,9 @@ public class SettingsActivity extends AppCompatActivity {
 //                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 //                        numberPicker.setTextSize(50);
 //                    }
-                    numberPicker.setMinValue(7);
-                    numberPicker.setMaxValue(15);
+                    numberPicker.setMinValue(1);
+                    numberPicker.setMaxValue(30);
+                    numberPicker.setValue(7);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                             .setTitle("Choose Day to be notified")
                             .setPositiveButton("ok", new DialogInterface.OnClickListener() {
