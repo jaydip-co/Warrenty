@@ -161,6 +161,8 @@ public class BackUpFragment extends Fragment {
         GoogleAccountCredential credential = GoogleAccountCredential.usingOAuth2(getContext()
                 , Collections.singleton(DriveScopes.DRIVE_APPDATA));
         credential.setSelectedAccount(Gaccount.getAccount());
+
+        /////TODO : deprecated method
         Drive drive = new Drive(AndroidHttp.newCompatibleTransport(),new GsonFactory(),credential);
         Drive mDrive = new Drive.Builder(AndroidHttp.newCompatibleTransport(),new GsonFactory(),credential)
                 .setApplicationName("Warranty")

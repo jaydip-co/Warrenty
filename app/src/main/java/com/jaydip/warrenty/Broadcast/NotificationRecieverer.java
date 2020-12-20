@@ -44,7 +44,7 @@ public class NotificationRecieverer  extends BroadcastReceiver {
             @Override
             public void run() {
                 int leftDayT = PrefUtil.getPrefFieldInt(context, prefIds.ALARM_DAY);
-                int leftDay = leftDayT == 0 ? 10 : leftDayT;
+                int leftDay = leftDayT == 0 ? 7 : leftDayT;
 
                 List<ItemModel> models = dao.getModels();
 

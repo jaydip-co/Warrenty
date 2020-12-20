@@ -126,7 +126,7 @@ public class SettingsActivity extends AppCompatActivity {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
             syncSwitch = getPreferenceManager().findPreference("Sync_switch");
             update = getPreferenceManager().findPreference("sync");
-//            update.setEnabled(false);
+
             update.setLayoutResource(R.layout.update_button);
             restore = getPreferenceScreen().findPreference("restore");
             restore.setLayoutResource(R.layout.restore_button);
@@ -154,10 +154,7 @@ public class SettingsActivity extends AppCompatActivity {
             int minuteT = PrefUtil.getPrefFieldInt(getContext(),prefIds.ALARM_TIME_MINUTE);
             int hour = hourT == 0 ? 8 :hourT;
             int minute = minuteT ==0 ? 30 : minuteT;
-//            String gmail = PrefUtil.getPrefField(getContext(),prefIds.LOGED_IN_ACOUNT);
-//            if(!gmail.equals(PrefUtil.Default_Value)){
-//                syncSwitch.setSummary(gmail);
-//            }
+
 
 
             switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -188,26 +185,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
             setInitialValues();
-//            String InitialUpdate = PrefUtil.getPrefField(getContext(),prefIds.INITIAL_UPDATE_DONE);
-//            if(InitialUpdate.equals(PrefUtil.Default_Value)){
-//               syncSwitch.setChecked(false);
-//            }
 
-//            update.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//                @Override
-//                public boolean onPreferenceClick(Preference preference) {
-//                    Log.e("jaydip",id);
-//                    WorkManager manager = WorkManager.getInstance(getContext());
-//                    WorkRequest request = new OneTimeWorkRequest.Builder(downloadWorker.class)
-//                            .build();
-//                    manager.enqueue(request);
-//                    return false;
-//                }
-//            });
-//            setup();
-
-
-//            Log.e("jaydip","restore text "+t.getText().toString());
 
 
 

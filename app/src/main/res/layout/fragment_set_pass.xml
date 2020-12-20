@@ -12,14 +12,12 @@
 
 
     <LinearLayout
-        android:id="@+id/linearlayout"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
             android:layout_gravity="center_horizontal"
-            android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -197,8 +195,7 @@
             />
         <EditText
         android:visibility="gone"
-        android:id="@+id/password"
-        android:layout_width="200dp"
+            android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:inputType="numberPassword"
 
@@ -215,7 +212,6 @@
         />
         <TextView
 
-            android:id="@+id/correction"
             android:layout_gravity="center"
             android:visibility="gone"
             android:textColor="@color/error"
@@ -225,7 +221,6 @@
     <EditText
         android:visibility="gone"
         android:inputType="numberPassword"
-        android:id="@+id/passwordagain"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/round_intput"
@@ -238,7 +233,6 @@
         android:hint="Enter again"
         />
         <TextView
-            android:id="@+id/samepass"
             android:text="Doesnt't match"
             android:textColor="@color/error"
             android:visibility="gone"

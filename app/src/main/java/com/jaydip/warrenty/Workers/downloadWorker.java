@@ -51,7 +51,6 @@ public class downloadWorker extends Worker {
         GoogleAccountCredential credential = GoogleAccountCredential.usingOAuth2(getApplicationContext(),
                 Collections.singleton(DriveScopes.DRIVE_FILE));
         credential.setSelectedAccount(account.getAccount());
-        Drive drive = new Drive.Builder(AndroidHttp.newCompatibleTransport(),new GsonFactory(),credential).build();
         helper = new DriveServiceHelper(getApplicationContext());
         builder = new NotificationCompat.Builder(context, App.NOTIFICATI_ID);
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

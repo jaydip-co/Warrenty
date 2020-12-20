@@ -41,6 +41,7 @@ public class DriveServiceHelper {
             Log.e("jaydip"," found aCCount");
             GoogleAccountCredential credential = GoogleAccountCredential.usingOAuth2(context,Collections.singleton(DriveScopes.DRIVE_APPDATA));
             credential.setSelectedAccount(account.getAccount());
+            ////TODO ceprecated method
             mDriveService = new Drive.Builder(AndroidHttp.newCompatibleTransport(),new GsonFactory(),credential)
                     .setApplicationName("Warranty").build();
         }

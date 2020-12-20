@@ -32,12 +32,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Utils {
+    ////////////
     static final int REQUEST_CODE = 250;
     static final  int REQUEST_CODE_FOR_UPDATE= 266;
     public static void setDailyUpdate(Context context){
         PackageManager packageManager = context.getPackageManager();
         ComponentName componentName = new ComponentName(context, DailyUpdateReciever.class);
-        packageManager.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED,packageManager.DONT_KILL_APP);
+        packageManager.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
 
 
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

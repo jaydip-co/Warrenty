@@ -31,18 +31,16 @@ import com.jaydip.warrenty.prefsUtil.prefIds;
 
 public class SetPassFragment extends Fragment {
 
-    EditText pincode,pincodeAgain;
-    ImageView e1,e2,e3,e4,e1Again,e2Again,e3Again,e4Again;
+    EditText pincode, pincodeAgain;
+    ImageView e1, e2, e3, e4, e1Again, e2Again, e3Again, e4Again;
 
     Drawable input;
     Drawable inputFocus;
     Button save;
     CategoryViewModel categoryViewModel;
     StringBuilder builder;
-    Drawable pin_entered,pin_back,pinback_focus,pinback_entered_focus,pin_error;
+    Drawable pin_entered, pin_back, pinback_focus, pinback_entered_focus, pin_error;
     boolean isWrongPin = false;
-
-
 
 
     public SetPassFragment() {
@@ -63,7 +61,7 @@ public class SetPassFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ///////////////////////////////////////////////////////////////
-        View v = inflater.inflate(R.layout.fragment_set_pass,container,false);
+        View v = inflater.inflate(R.layout.fragment_set_pass, container, false);
         input = getResources().getDrawable(R.drawable.round_intput);
         inputFocus = getResources().getDrawable(R.drawable.round_input_focus);
 
@@ -88,8 +86,6 @@ public class SetPassFragment extends Fragment {
         pincode = v.findViewById(R.id.pincode_edit);
         pincodeAgain = v.findViewById(R.id.pincode_edit_again);
 
-//        e1.setImageDrawable(pinback_focus);
-
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -108,37 +104,25 @@ public class SetPassFragment extends Fragment {
         });
 
 
-
-
-
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//              if(error.getVisibility() == View.GONE && samePass.getVisibility() == View.GONE &&
-//                    pass.getText().toString().length() > 0 && passAgain.getText().toString().length() > 0){
-//                  saveNewUser();
-//              }
                 String pinAgain = pincodeAgain.getText().toString();
                 String pin = pincode.getText().toString();
-                if(pin.equals(pinAgain)){
-                    Log.e("jaydip",pincode.getText().toString());
-                    PrefUtil.saveToPrivate(getActivity(), prefIds.TEMP_PIN,pincode.getText().toString());
+                if (pin.equals(pinAgain)) {
+                    Log.e("jaydip", pincode.getText().toString());
+                    PrefUtil.saveToPrivate(getActivity(), prefIds.TEMP_PIN, pincode.getText().toString());
                     FragmentManager manager = getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     QuestionsFrag questionsFrag = new QuestionsFrag();
-                    transaction.replace(R.id.Container,questionsFrag);
+                    transaction.replace(R.id.Container, questionsFrag);
                     transaction.commit();
-                }
-                else {
+                } else {
                     setNotSamePin();
                 }
 
             }
         });
-
-
-
 
 
         TextWatcher watcher = new TextWatcher() {
@@ -159,10 +143,6 @@ public class SetPassFragment extends Fragment {
             }
         };
         pincode.addTextChangedListener(watcher);
-//       e1.addTextChangedListener(watcher);
-//        e2.addTextChangedListener(watcher);
-//        e3.addTextChangedListener(watcher);
-//        e4.addTextChangedListener(watcher);
 
         TextWatcher watcherAgain = new TextWatcher() {
             @Override
@@ -183,18 +163,18 @@ public class SetPassFragment extends Fragment {
         pincodeAgain.addTextChangedListener(watcherAgain);
         return v;
     }
-    void createPinAgain(){
+
+    void createPinAgain() {
         Log.e("jaydip pin again ", pincodeAgain.getText().toString());
         int len = pincodeAgain.getText().toString().length();
-        if(len == 4 && pincode.getText().length() == 4){
+        if (len == 4 && pincode.getText().length() == 4) {
             save.setEnabled(true);
-        }
-        else {
+        } else {
             save.setEnabled(false);
         }
-        switch (len){
+        switch (len) {
             case 0:
-                if(isWrongPin){
+                if (isWrongPin) {
                     e1Again.setImageDrawable(pin_error);
                     e2Again.setImageDrawable(pin_error);
                     e3Again.setImageDrawable(pin_error);
@@ -208,9 +188,6 @@ public class SetPassFragment extends Fragment {
                 break;
             case 1:
                 isWrongPin = false;
-//                e1.setText("");
-//                e1.setBackground(getActivity().getDrawable(R.drawable.pincode_entered_back));
-//                e2.requestFocus();
                 e1Again.setImageDrawable(pin_entered);
                 e2Again.setImageDrawable(pinback_focus);
                 e3Again.setImageDrawable(pin_back);
@@ -218,18 +195,13 @@ public class SetPassFragment extends Fragment {
                 break;
             case 2:
 
-//                e2.setBackground(getActivity().getDrawable(R.drawable.pincode_entered_back));
-//                e3.requestFocus();
-//                e2.setText("");
                 e1Again.setImageDrawable(pin_entered);
                 e2Again.setImageDrawable(pin_entered);
                 e3Again.setImageDrawable(pinback_focus);
                 e4Again.setImageDrawable(pin_back);
                 break;
             case 3:
-//                e3.setText("");
-//                e3.setBackground(getActivity().getDrawable(R.drawable.pincode_entered_back));
-//                e4.requestFocus();
+
                 e1Again.setImageDrawable(pin_entered);
                 e2Again.setImageDrawable(pin_entered);
                 e3Again.setImageDrawable(pin_entered);
@@ -244,7 +216,8 @@ public class SetPassFragment extends Fragment {
 
         }
     }
-    void setNotSamePin(){
+
+    void setNotSamePin() {
         isWrongPin = true;
         e1Again.setImageDrawable(pin_error);
         e2Again.setImageDrawable(pin_error);
@@ -253,21 +226,16 @@ public class SetPassFragment extends Fragment {
         pincodeAgain.setText("");
 
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    void createPin(){
-//        Log.e("jaydip",s);
-//        builder.append(s);
-        Log.e("jaydip",pincode.getText().toString());
-
-
+    void createPin() {
         int len = pincode.getText().toString().length();
-        if(len == 4 && pincodeAgain.getText().length() == 4){
+        if (len == 4 && pincodeAgain.getText().length() == 4) {
             save.setEnabled(true);
-        }
-        else {
+        } else {
             save.setEnabled(false);
         }
-        switch (len){
+        switch (len) {
             case 0:
                 e1.setImageDrawable(pinback_focus);
                 e2.setImageDrawable(pin_back);
@@ -275,9 +243,7 @@ public class SetPassFragment extends Fragment {
                 e4.setImageDrawable(pin_back);
                 break;
             case 1:
-//                e1.setText("");
-//                e1.setBackground(getActivity().getDrawable(R.drawable.pincode_entered_back));
-//                e2.requestFocus();
+
                 e1.setImageDrawable(pin_entered);
                 e2.setImageDrawable(pinback_focus);
                 e3.setImageDrawable(pin_back);
@@ -285,18 +251,13 @@ public class SetPassFragment extends Fragment {
                 break;
             case 2:
 
-//                e2.setBackground(getActivity().getDrawable(R.drawable.pincode_entered_back));
-//                e3.requestFocus();
-//                e2.setText("");
+
                 e1.setImageDrawable(pin_entered);
                 e2.setImageDrawable(pin_entered);
                 e3.setImageDrawable(pinback_focus);
                 e4.setImageDrawable(pin_back);
                 break;
             case 3:
-//                e3.setText("");
-//                e3.setBackground(getActivity().getDrawable(R.drawable.pincode_entered_back));
-//                e4.requestFocus();
                 e1.setImageDrawable(pin_entered);
                 e2.setImageDrawable(pin_entered);
                 e3.setImageDrawable(pin_entered);

@@ -80,7 +80,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
                 <ImageView
-                    android:id="@+id/leftDays"
                     android:layout_margin="1dp"
                     android:src="@drawable/left_days_full"
                     android:layout_width="148dp"
