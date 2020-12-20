@@ -32,7 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Utils {
-    ////////////
+    //////////////
     static final int REQUEST_CODE = 250;
     static final  int REQUEST_CODE_FOR_UPDATE= 266;
     public static void setDailyUpdate(Context context){
